@@ -233,19 +233,6 @@ describe('Engine', () => {
             sinon.assert.calledOnce(mockContext.transactionEnd);
         });
 
-        it('should throw error if upgrade not allowed', async () => {
-            const sysdata = sinon.createStubInstance(DataCollection);
-            mockContainer.getVersion.returns('0.21.0');
-
-            try {
-                await engine.upgrade(mockContext, '', sysdata, {runtimeVersion:'0.20.0'});
-                should.fail('Expected error to be thrown');
-            } catch(err) {
-                err.message.should.match(/Cannot upgrade/);
-                sinon.assert.notCalled(sysdata.update);
-            }
-        });
-
         it('should rollback if sysdata update fails', async () => {
             const sysdata = sinon.createStubInstance(DataCollection);
             sysdata.update.rejects(new Error('update failure'));
