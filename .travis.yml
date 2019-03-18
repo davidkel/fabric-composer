@@ -3,13 +3,13 @@ node_js:
     - '8'
 matrix:
     include:
-        - env: INTEST=hlfv1 FC_TASK=systest ENDORSEMENT_HANDLER=''
-        - env: FVTEST=hlfv1-2_tls FC_TASK=systest ENDORSEMENT_HANDLER=''
-        - env: FVTEST=hlfv1-1_tls FC_TASK=systest ENDORSEMENT_HANDLER=''
-        - env: INTEST=e2e FC_TASK=systest ENDORSEMENT_HANDLER=''
+        - env: INTEST=hlfv1 FC_TASK=systest ENDORSEMENT_HANDLER='dodgy'
+        - env: FVTEST=hlfv1-2_tls FC_TASK=systest ENDORSEMENT_HANDLER='dodgy'
+        - env: FVTEST=hlfv1-1_tls FC_TASK=systest ENDORSEMENT_HANDLER='dodgy'
+        - env: INTEST=e2e FC_TASK=systest ENDORSEMENT_HANDLER='dodgy'
         - {}
-        - env: FVTEST=hlfv1_hsm FC_TASK=systest ENDORSEMENT_HANDLER=''
-        - env: FVTEST=embedded,proxy,web FC_TASK=systest ENDORSEMENT_HANDLER=''
+        - env: FVTEST=hlfv1_hsm FC_TASK=systest ENDORSEMENT_HANDLER='dodgy'
+        - env: FVTEST=embedded,proxy,web FC_TASK=systest ENDORSEMENT_HANDLER='dodgy'
         - env: DOCS=full FC_TASK=docs
 dist: trusty
 addons:
