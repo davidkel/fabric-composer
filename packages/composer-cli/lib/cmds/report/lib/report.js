@@ -14,7 +14,7 @@
 
 'use strict';
 const cmdUtil = require('../../utils/cmdutils');
-const report = require('composer-report');
+//const report = require('composer-report');
 const chalk = require('chalk');
 
 /**
@@ -57,4 +57,4 @@ class Report {
         return Promise.resolve();
     }
 }
-module.exports = Report;
+//module.exports = Report;

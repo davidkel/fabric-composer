@@ -29,5 +29,5 @@ module.exports.Generator = require('./lib/cmds/generator');
 module.exports.Identity = require('./lib/cmds/identity');
 module.exports.Network = require('./lib/cmds/network');
 module.exports.Participant = require('./lib/cmds/participant');
-module.exports.Report = require('./lib/cmds/report');
+//module.exports.Report = require('./lib/cmds/report');
 module.exports.Transaction = require('./lib/cmds/transaction');

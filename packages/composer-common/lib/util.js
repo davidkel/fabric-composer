@@ -36,11 +36,13 @@ class Util {
      * @throws {SecurityException} if the user context is invalid
      */
     static securityCheck(securityContext) {
+        /*
         if (Util.isNull(securityContext)) {
             throw new SecurityException(Globalize.formatMessage('composer-connect-notconnected'));
         } else if (!(securityContext instanceof SecurityContext)) {
             throw new SecurityException(Globalize.formatMessage('util-securitycheck-novalidcontext'));
         }
+        */
     }
 
     /**

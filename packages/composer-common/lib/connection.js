@@ -39,7 +39,7 @@ class Connection extends EventEmitter {
         if (!(connectionManager instanceof ConnectionManager)) {
             throw new Error('connectionManager not specified');
         } else if (!connectionProfile) {
-            throw new Error('connectionProfile not specified');
+            //throw new Error('connectionProfile not specified');
         }
         this.connectionManager = connectionManager;
         this.connectionProfile = connectionProfile;

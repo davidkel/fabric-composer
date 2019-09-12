@@ -195,9 +195,9 @@ class QueryCompiler {
     buildTrivialCompiledQueryGenerator(compiledQuery) {
         const compiledQueryString = JSON.stringify(compiledQuery);
         return (inputParameters) => {
-            if (Object.keys(inputParameters).length !== 0) {
-                throw new Error('No parameters should be specified for this query');
-            }
+            //if (Object.keys(inputParameters).length !== 0) {
+            //    throw new Error('No parameters should be specified for this query');
+            //}
             return compiledQueryString;
         };
     }
@@ -215,16 +215,17 @@ class QueryCompiler {
             // Check for all required parameters.
             requiredParameters.forEach((requiredParameter) => {
                 if (inputParameters[requiredParameter] === undefined) {
-                    throw new Error('Required parameter ' + requiredParameter + ' has not been specified');
+                    inputParameters[requiredParameter] === requiredParameter;
+//                    throw new Error('Required parameter ' + requiredParameter + ' has not been specified');
                 }
             });
 
             // Check for any extraneous parameters.
-            Object.keys(inputParameters).forEach((inputParameter) => {
-                if (requiredParameters.indexOf(inputParameter) === -1) {
-                    throw new Error('Invalid or extraneous parameter ' + inputParameter + ' has been specified');
-                }
-            });
+            //Object.keys(inputParameters).forEach((inputParameter) => {
+            //    if (requiredParameters.indexOf(inputParameter) === -1) {
+            //        throw new Error('Invalid or extraneous parameter ' + inputParameter + ' has been specified');
+            //    }
+            //});
 
             // Delete all parameters from the last execution.
             Object.keys(parametersToUse).forEach((parameterToUse) => {

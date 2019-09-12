@@ -18,6 +18,7 @@ const Admin = require('composer-admin');
 const BusinessNetworkDefinition = Admin.BusinessNetworkDefinition;
 const fs = require('fs');
 const cmdUtil = require('../../utils/cmdutils');
+const QueryCompiler = require('../../../../../composer-runtime/lib/querycompiler');
 /**
  * <p>
  * Composer List Archive command
@@ -41,6 +42,22 @@ class ListBNA {
             cmdUtil.log('Identifier:'+businessNetwork.getIdentifier());
             cmdUtil.log('Name:'+businessNetwork.getName());
             cmdUtil.log('Version:'+businessNetwork.getVersion());
+
+            const qm = businessNetwork.getQueryManager();
+            const cqb = new QueryCompiler().compile(qm);
+            for (const cq of cqb.compiledQueries) {
+                console.log(cq.generator({
+                    'id': '1',
+                    'name': 'name',
+                    mFirmName: 'mFirmName',
+                    lastName: 'lastName',
+                    phone: 'phone',
+                    insuranceNumberHash: 'insuranceNumberHash',
+                    sortcode: 'sortcode'
+                }));
+            }
+
+            //console.log(cqb.compiledQueries);
 
             return;
 

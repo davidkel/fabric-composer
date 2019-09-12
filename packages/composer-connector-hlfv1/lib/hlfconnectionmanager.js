@@ -23,7 +23,7 @@ const path = require('path');
 const thenifyAll = require('thenify-all');
 const jsrsa = require('jsrsasign');
 const KEYUTIL = jsrsa.KEYUTIL;
-const ecdsaKey = require('fabric-client/lib/impl/ecdsa/key.js');
+//const ecdsaKey = require('fabric-client/lib/impl/ecdsa/key.js');
 
 const cloneDeep = require('lodash').cloneDeep;
 const LOG = Logger.getLog('HLFConnectionManager');
@@ -50,10 +50,10 @@ global.hfc = {
 };
 
 
-const Client = require('fabric-client');
+//const Client = require('fabric-client');
 const ConnectionManager = require('composer-common').ConnectionManager;
 const HLFConnection = require('./hlfconnection');
-const HLFWalletProxy = require('./hlfwalletproxy');
+//const HLFWalletProxy = require('./hlfwalletproxy');
 const Wallet = require('composer-common').Wallet;
 
 let HSMSuite = new Map();
@@ -459,21 +459,21 @@ class HLFConnectionManager extends ConnectionManager {
 
         // Validate all the arguments.
         if (!connectionProfile) {
-            throw new Error('connectionProfile not specified');
+            //throw new Error('connectionProfile not specified');
         } else if (!connectOptions) {
             throw new Error('connectOptions not specified');
         }
 
         // Create a new client instance.
-        const client = await HLFConnectionManager.createClient(connectOptions, true);
+        //const client = await HLFConnectionManager.createClient(connectOptions, true);
 
         // this should return the first defined channel.
-        const channel = client.getChannel();
+        //const channel = client.getChannel();
         // Create a CA client.
-        const caClient = client.getCertificateAuthority();
+        //const caClient = client.getCertificateAuthority();
 
         // Now we can create the connection.
-        let connection = HLFConnectionManager.createHLFConnection(this, connectionProfile, businessNetworkIdentifier, connectOptions, client, channel, caClient);
+        let connection = HLFConnectionManager.createHLFConnection(this, connectionProfile, businessNetworkIdentifier, connectOptions, null, null, null);
         // Don't log the connection object it's too big
         LOG.exit(method);
         return connection;

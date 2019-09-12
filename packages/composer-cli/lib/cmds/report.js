@@ -14,6 +14,7 @@
 
 'use strict';
 
+/*
 const Report = require('./report/lib/report.js');
 
 exports.command = 'report';
@@ -23,3 +24,4 @@ exports.handler = function (argv) {
 };
 
 module.exports.Report = require('./report/lib/report');
+*/

@@ -195,13 +195,14 @@ class AdminConnection {
     async connect (cardName) {
         const method = 'connect';
         LOG.entry(method, cardName);
-        const card = await this.cardStore.get(cardName);
-        const wallet = await this.cardStore.getWallet(cardName);
+        const card = null; //await this.cardStore.get(cardName);
+        const wallet = null; // await this.cardStore.getWallet(cardName);
         this.connection = await this.connectionProfileManager.connectWithData(
-            card.getConnectionProfile(),
-            card.getBusinessNetworkName(),
+            {'x-type': 'hlfv1'},
+            null,
             { cardName, wallet }
         );
+        /*
         let secret = card.getEnrollmentCredentials();
         if (!secret) {
             secret = 'na';
@@ -213,6 +214,7 @@ class AdminConnection {
         if (card.getBusinessNetworkName()) {
             await this.ping(this.securityContext);
         }
+        */
         LOG.exit(method);
     }
 

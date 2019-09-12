@@ -18,16 +18,16 @@ const Connection = require('composer-common').Connection;
 const fs = require('fs-extra');
 const HLFSecurityContext = require('./hlfsecuritycontext');
 const HLFUtil = require('./hlfutil');
-const HLFTxEventHandler = require('./hlftxeventhandler');
+//const HLFTxEventHandler = require('./hlftxeventhandler');
 const Logger = require('composer-common').Logger;
 const path = require('path');
 const temp = require('temp').track();
 const semver = require('semver');
 const thenifyAll = require('thenify-all');
 
-const User = require('fabric-client/lib/User.js');
-const TransactionID = require('fabric-client/lib/TransactionID');
-const FABRIC_CONSTANTS = require('fabric-client/lib/Constants');
+//const User = require('fabric-client/lib/User.js');
+//const TransactionID = require('fabric-client/lib/TransactionID');
+//const FABRIC_CONSTANTS = require('fabric-client/lib/Constants');
 
 const IndexCompiler = require('composer-common').IndexCompiler;
 
@@ -121,11 +121,11 @@ class HLFConnection extends Connection {
         if (!connectOptions) {
             throw new Error('connectOptions not specified');
         } else if (!client) {
-            throw new Error('client not specified');
+            //throw new Error('client not specified');
         } else if (!channel) {
-            throw new Error('channel not specified');
+            //throw new Error('channel not specified');
         } else if (!caClient) {
-            throw new Error('caClient not specified');
+            //throw new Error('caClient not specified');
         }
 
         // Save all the arguments away for later.
@@ -497,6 +497,9 @@ class HLFConnection extends Connection {
             throw new Error('businessNetworkDefinition not specified');
         }
 
+        console.log('in install');
+
+        /*
         // Update the package.json for install to Fabric
         const bnaPackage = businessNetworkDefinition.getMetadata().getPackageJson();
         bnaPackage.dependencies = this._createPackageDependencies(bnaPackage.dependencies);
@@ -524,22 +527,26 @@ class HLFConnection extends Connection {
         const packageContent = JSON.stringify(bnaPackage);
         this.fs.writeFileSync(packagePath, packageContent);
 
+*/
         // write the query indexes to statedb/couchdb/indexes
         const queryManager = businessNetworkDefinition.getQueryManager();
         const indexCompiler = new IndexCompiler();
         const indexes = indexCompiler.compile(queryManager);
+        /*
         let indexDir = path.join(installDir, 'statedb');
         fs.mkdirSync(indexDir);
         indexDir = path.join(indexDir, 'couchdb');
         fs.mkdirSync(indexDir);
         indexDir = path.join(indexDir, 'indexes');
         fs.mkdirSync(indexDir);
-
+        */
         indexes.forEach(index => {
             const json = index;
             const designDoc = json.ddoc + '.json';
-            const indexFile = path.resolve(indexDir, designDoc);
-            this.fs.writeFileSync(indexFile, JSON.stringify(index));
+            //const indexFile = path.resolve(indexDir, designDoc);
+            const dumpFile = path.resolve('/tmp/indexes', designDoc);
+            console.log('writing to', dumpFile);
+            this.fs.writeFileSync(dumpFile, JSON.stringify(index));
         });
 
         let chaincodeVersion = businessNetworkDefinition.getVersion();
@@ -1314,6 +1321,7 @@ class HLFConnection extends Connection {
      * @returns {Array} the list of any ChannelPeer objects that satisfy all the criteria.
      */
     getChannelPeersInOrg(peerRoles) {
+        return [];
         const organizationId = this.client.getMspid();
         const channelPeers = this.channel.getChannelPeers();
         return channelPeers.filter((channelPeer) => {
